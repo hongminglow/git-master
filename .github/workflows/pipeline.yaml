@@ -1,0 +1,22 @@
+name: CI Pipeline
+# "on" specifies the events that trigger the workflow
+on:
+  push:
+    # specify branches in array to limit triggering
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    # steps defined will be executed in order
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Install dependencies
+        run: npm install
+      - name: Run tests
+        run: npm test
